@@ -3,5 +3,5 @@ import { AxiosMethods } from "@/types&enums/enums"
 
 export const getHomes = ()=>
 {
-    return makeRequest({url:'home',method:AxiosMethods.GET})
+    return makeRequest({url:'',method:AxiosMethods.GET})
 }
