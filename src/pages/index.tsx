@@ -54,10 +54,16 @@ export default function Home()
       setIsConnected(false);
     }
 
+    const nsList = (data:any)=>
+    {
+      console.log(data);
+    }
+
     socket.on('connect', onConnect);
     socket.io.on('reconnect', (data) => onReConnect(data));
     socket.on('disconnect', onDisconnect);
     socket.on('messageToClient', (data)=> getMessage(data));
+    socket.on('nsList', (data)=> nsList(data));
     
     return () => 
     {
@@ -65,6 +71,7 @@ export default function Home()
       socket.io.off('reconnect', onReConnect);
       socket.off('disconnect', onDisconnect);
       socket.off('messageToClient', (data)=> getMessage(data));
+      socket.off('nsList', (data)=> nsList(data));
     };
   }, []);
   
@@ -83,7 +90,7 @@ export default function Home()
           messages.map((message,index)=>
           {
             return(
-              <p className='' key={`message-from-another-client-${index}`}>
+              <p className='text-white' key={`message-from-another-client-${index}`}>
                 {message}
               </p>
             )
