@@ -1,15 +1,29 @@
+import { RootState, store } from '@/reduxStore/store'
 import '@/styles/globals.css'
 import type { AppProps } from 'next/app'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
+import { Provider, useSelector } from 'react-redux'
 
-export default function App({ Component, pageProps }: AppProps) 
+
+function ReduxProvider(appProps: any) 
+{
+  return (
+        <Provider store={store}>
+          <App {...appProps}/>
+        </Provider >
+  )
+}
+
+function App({ Component, pageProps }: AppProps) 
 {
   const router = useRouter()
+  const {token} = useSelector((state:RootState)=> state?.preferences?.prefs)
 
   useEffect(()=>
   {
-    const token = localStorage.getItem('token');
+    console.log(token);
+    
     if(!token)
     {
       router.push('/login')
@@ -22,3 +36,6 @@ export default function App({ Component, pageProps }: AppProps)
     </main>
   )
 }
+
+
+export default ReduxProvider
