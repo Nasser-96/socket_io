@@ -1,7 +1,7 @@
 import { RootState, store } from '@/reduxStore/store'
 import '@/styles/globals.css'
 import type { AppProps } from 'next/app'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 import { Provider, useSelector } from 'react-redux'
 
@@ -18,7 +18,7 @@ function ReduxProvider(appProps: any)
 function App({ Component, pageProps }: AppProps) 
 {
   const router = useRouter()
-  const {token} = useSelector((state:RootState)=> state?.preferences?.prefs)
+  const { token } = useSelector((state:RootState)=> state?.preferences?.prefs)
 
   useEffect(()=>
   {
